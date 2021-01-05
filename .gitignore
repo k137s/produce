@@ -1,0 +1,19 @@
+# npm module
+node_modules/
+
+# vscode
+.vscode/
+*.code-workspace
+
+# pycharm
+.idea/
+
+# venv
+.venv/
+
+# config
+server/app/config/.config/
+server/app/service/script/cdata.js
+
+# test
+test/.test/
