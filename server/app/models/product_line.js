@@ -10,6 +10,7 @@ const ProductLine = connector.define("ProductLine", {
     sequence: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
         comment: "生产线号"
     },
     title: {

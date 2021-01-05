@@ -12,6 +12,7 @@ Craft.init({
     name: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
         comment: "工艺名称"
     },
     prefix: {

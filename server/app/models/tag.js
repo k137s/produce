@@ -10,6 +10,7 @@ const Tag = connector.define("Tag", {
     name: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
         comment: "标签"
     },
 }, {

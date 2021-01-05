@@ -11,6 +11,7 @@ const ProductOrder = connector.define("ProductOrder", {
     orderId: {
         type: Sequelize.STRING(),
         allowNull: false,
+        unique: true,
         comment: "订单号",
         defaultValue: "OGS",
         set(val) {

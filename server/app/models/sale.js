@@ -10,6 +10,7 @@ const Sale = connector.define("Sale", {
     name: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
         comment: "销售名称"
     },
     phone: {

@@ -10,6 +10,7 @@ const Role = connector.define("Role", {
     name: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
         comment: "角色名称"
     },
     description: {

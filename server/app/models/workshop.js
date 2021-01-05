@@ -10,6 +10,7 @@ const Workshop = connector.define("Workshop", {
     title: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
         comment: "车间名"
     },
     status: {

@@ -12,6 +12,7 @@ Permission.init({
     name: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
         comment: "权限名称”"
     },
     path: {
