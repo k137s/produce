@@ -18,6 +18,7 @@ Craft.init({
     prefix: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
         comment: "工艺简称"
     },
     description: {

@@ -1,21 +1,40 @@
-import Context from "koa";
+import {
+    Role
+} from "../models/index.js";
+import {
+    RoleService
+} from "../service/index.js";
+import Controller from "./controller.js";
 
 
-// 角色操作控制
+// 工艺操作控制
 export default class RoleController {
     static async listRoles(ctx) {
-        ctx.body = "ListRoles controller";
+        const roles = await Controller.listObjects(ctx, RoleService, Role);
+        ctx.body = roles;
     }
 
     static async showRoleDetail(ctx) {
-        ctx.body = `ShowRoleDetail controller with ID = ${ctx.params.id}`;
+        const role = await Controller.showObjectDetail(ctx, RoleService, Role);
+        ctx.body = role;
+    }
+
+    static async addRole(ctx) {
+        const role = await RoleService.getObjectByPk(Role, ctx.params.id);
+        role = await Controller.addObject(ctx, RoleService, Role, role);
+        ctx.body = role;
     }
 
     static async updateRole(ctx) {
-        ctx.body = `UpdateRole controller with ID = ${ctx.params.id}`;
+        const role = await Controller.updateObject(ctx, RoleService, Role);
+        ctx.body = role;
     }
 
     static async deleteRole(ctx) {
-        ctx.body = `DeleteRole controller with ID = ${ctx.params.id}`;
+        await Controller.deleteObject(ctx, RoleService, Role);
+    }
+
+    static async deleteRoles(ctx) {
+        await Controller.deleteObjects(ctx, RoleService, Role);
     }
 }

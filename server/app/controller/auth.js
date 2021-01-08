@@ -1,27 +1,27 @@
-import User from "../models/user.js"
+import {
+    User
+} from "../models/index.js";
+import {
+    UserService
+} from "../service/index.js";
+import Controller from "./controller.js";
 
 
 // 注册登录控制
 export default class AuthController {
     static async login(ctx) {
-        let {
+        const {
             username,
             password
         } = ctx.request.body;
         console.log(username, password);
-        let user = await User.findOne({
-            where: {
-                username: username
-            }
-        });
+        const user = await UserService.getUserByName(User, username);
         if (!user) {
-            let message = "用户名不存在";
+            const message = "用户名不存在";
             ctx.body = message
         } else {
-
-            console.log(user);
-            ctx.response.status = 200;
-            ctx.body = "ok";
+            ctx.status = 301;
+            ctx.redirect(`/user/${user.id}`);
         }
     }
 

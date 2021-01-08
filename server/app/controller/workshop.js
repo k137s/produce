@@ -1,21 +1,40 @@
-import Context from "koa";
+import {
+    Workshop
+} from "../models/index.js";
+import {
+    WorkshopService
+} from "../service/index.js";
+import Controller from "./controller.js";
 
 
 // 车间操作控制
 export default class WorkshopController {
     static async listWorkshops(ctx) {
-        ctx.body = "ListWorkshops controller";
+        const workshops = await Controller.listObjects(ctx, WorkshopService, Workshop);
+        ctx.body = workshops;
     }
 
     static async showWorkshopDetail(ctx) {
-        ctx.body = `ShowWorkshopDetail controller with ID = ${ctx.params.id}`;
+        const workshop = await Controller.showObjectDetail(ctx, WorkshopService, Workshop);
+        ctx.body = workshop;
+    }
+
+    static async addWorkshop(ctx) {
+        const workshop = await WorkshopService.getObjectByPk(Workshop, ctx.params.id);
+        workshop = await Controller.addObject(ctx, WorkshopService, Workshop, workshop);
+        ctx.body = workshop;
     }
 
     static async updateWorkshop(ctx) {
-        ctx.body = `UpdateWorkshop controller with ID = ${ctx.params.id}`;
+        const workshop = await Controller.updateObject(ctx, WorkshopService, Workshop);
+        ctx.body = workshop;
     }
 
     static async deleteWorkshop(ctx) {
-        ctx.body = `DeleteWorkshop controller with ID = ${ctx.params.id}`;
+        await Controller.deleteObject(ctx, WorkshopService, Workshop);
+    }
+
+    static async deleteWorkshops(ctx) {
+        await Controller.deleteObjects(ctx, WorkshopService, Workshop);
     }
 }

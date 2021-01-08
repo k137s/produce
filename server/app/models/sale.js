@@ -18,6 +18,12 @@ const Sale = connector.define("Sale", {
         allowNull: false,
         comment: "手机"
     },
+    joinTime: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+        comment: "入职时间"
+    }
 }, {
     tableName: "sales"
 });

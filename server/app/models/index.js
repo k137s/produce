@@ -73,7 +73,7 @@ Workshop.belongsToMany(Tag, {
     through: "workshop_tag",
     as: "Tags",
     foreignKey: {
-        name: "tag_id",
+        name: "workshop_id",
         allowNull: false
     },
 });
@@ -82,7 +82,7 @@ Tag.belongsToMany(Workshop, {
     through: "workshop_tag",
     as: "Workshops",
     foreignKey: {
-        name: "workshop_id",
+        name: "tag_id",
         allowNull: false
     },
 });
@@ -96,6 +96,37 @@ Role.hasMany(User, {
 User.belongsTo(Role, {
     foreignKey: "role_id",
     targetKey: "id"
+})
+
+// 订单与工艺
+Craft.hasMany(ProductOrder, {
+    foreignKey: "craft_prefix",
+    sourceKey: "prefix"
+})
+
+ProductOrder.belongsTo(Craft, {
+    foreignKey: "craft_prefix",
+    targetKey: "prefix"
+})
+
+
+// 角色权限
+Role.belongsToMany(Permission, {
+    through: "role_permission",
+    as: "Permissions",
+    foreignKey: {
+        name: "role_id",
+        allowNull: false
+    }
+})
+
+Permission.belongsToMany(Role, {
+    through: "role_permission",
+    as: "Roles",
+    foreignKey: {
+        name: "permission_id",
+        allowNull: false
+    }
 })
 
 

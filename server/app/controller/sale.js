@@ -1,21 +1,40 @@
-import Context from "koa";
+import {
+    Sale
+} from "../models/index.js";
+import {
+    SaleService
+} from "../service/index.js";
+import Controller from "./controller.js";
 
 
-// 销售操作控制
+// 工艺操作控制
 export default class SaleController {
     static async listSales(ctx) {
-        ctx.body = "ListSales controller";
+        const sales = await Controller.listObjects(ctx, SaleService, Sale);
+        ctx.body = sales;
     }
 
     static async showSaleDetail(ctx) {
-        ctx.body = `ShowSaleDetail controller with ID = ${ctx.params.id}`;
+        const sale = await Controller.showObjectDetail(ctx, SaleService, Sale);
+        ctx.body = sale;
+    }
+
+    static async addSale(ctx) {
+        const sale = await SaleService.getObjectByPk(Sale, ctx.params.id);
+        sale = await Controller.addObject(ctx, SaleService, Sale, sale);
+        ctx.body = sale;
     }
 
     static async updateSale(ctx) {
-        ctx.body = `UpdateSale controller with ID = ${ctx.params.id}`;
+        const sale = await Controller.updateObject(ctx, SaleService, Sale);
+        ctx.body = sale;
     }
 
     static async deleteSale(ctx) {
-        ctx.body = `DeleteSale controller with ID = ${ctx.params.id}`;
+        await Controller.deleteObject(ctx, SaleService, Sale);
+    }
+
+    static async deleteSales(ctx) {
+        await Controller.deleteObjects(ctx, SaleService, Sale);
     }
 }

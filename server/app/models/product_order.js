@@ -13,13 +13,6 @@ const ProductOrder = connector.define("ProductOrder", {
         allowNull: false,
         unique: true,
         comment: "订单号",
-        defaultValue: "OGS",
-        set(val) {
-            const title = "QSF";
-            const menu = "-NODE-";
-            const time = Date.now();
-            this.setDataValue("orderId", `${title}${menu}${val}-${time}`)
-        }
     },
     status: {
         type: Sequelize.ENUM,

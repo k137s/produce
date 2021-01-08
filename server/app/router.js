@@ -1,30 +1,24 @@
 import Router from "koa-router";
 
-import Auth from "./controller/auth.js";
-import User from "./controller/user.js";
-
-
-const unprotectRouter = new Router({
-    // prefix: "/un"
-});
-const protectRouter = new Router({
-    // prefix: "/kay"  // 路由前缀
-});
-
-// auth 相关路由
-unprotectRouter.post("/auth/login", Auth.login);
-unprotectRouter.post("/auth/register", Auth.register);
-
-// user 相关路由
-protectRouter.get("/user", User.listUsers);
-protectRouter.get("/user/:id", User.showUserDetail);
-protectRouter.post("/user", User.addUser);
-protectRouter.put("/user/:id", User.updateUser);
-protectRouter.delete("/user/:id", User.deleteUser);
-protectRouter.delete("/user", User.deleteUsers);
-
-
-export {
+import {
     unprotectRouter,
     protectRouter
-};
+} from "./routers/user.js";
+import craft from "./routers/craft.js";
+import customer from "./routers/customer.js";
+
+
+const router = new Router();
+
+// 调用 router 对象的 routes 方法获取到对应的 Koa 中间件
+// 调用 allowedMethods 方法注册了 HTTP 方法检测的中间件，当用户通过不正确的 HTTP 方法访问 API 时，就会自动返回 405 Method Not Allowed 状态码
+// 未保护的路由
+router.use("/auth", unprotectRouter.routes(), unprotectRouter.allowedMethods);
+// 受保护的路由
+router.use("/user", protectRouter.routes(), protectRouter.allowedMethods);
+
+router.use("/craft", craft.routes(), craft.allowedMethods());
+router.use("/customer", customer.routes(), customer.allowedMethods());
+
+
+export default router;

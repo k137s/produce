@@ -1,21 +1,40 @@
-import Context from "koa";
+import {
+    Tag
+} from "../models/index.js";
+import {
+    TagService
+} from "../service/index.js";
+import Controller from "./controller.js";
 
 
-// 标签操作控制
+// 工艺操作控制
 export default class TagController {
     static async listTags(ctx) {
-        ctx.body = "ListTags controller";
+        const tags = await Controller.listObjects(ctx, TagService, Tag);
+        ctx.body = tags;
     }
 
     static async showTagDetail(ctx) {
-        ctx.body = `ShowTagDetail controller with ID = ${ctx.params.id}`;
+        const tag = await Controller.showObjectDetail(ctx, TagService, Tag);
+        ctx.body = tag;
+    }
+
+    static async addTag(ctx) {
+        const tag = await TagService.getObjectByPk(Tag, ctx.params.id);
+        tag = await Controller.addObject(ctx, TagService, Tag, tag);
+        ctx.body = tag;
     }
 
     static async updateTag(ctx) {
-        ctx.body = `UpdateTag controller with ID = ${ctx.params.id}`;
+        const tag = await Controller.updateObject(ctx, TagService, Tag);
+        ctx.body = tag;
     }
 
     static async deleteTag(ctx) {
-        ctx.body = `DeleteTag controller with ID = ${ctx.params.id}`;
+        await Controller.deleteObject(ctx, TagService, Tag);
+    }
+
+    static async deleteTags(ctx) {
+        await Controller.deleteObjects(ctx, TagService, Tag);
     }
 }

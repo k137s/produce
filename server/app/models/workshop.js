@@ -7,7 +7,7 @@ import connector from "../service/script/connector.js";
 
 // 创建车间模型，数据库保存为 modelName: workshop
 const Workshop = connector.define("Workshop", {
-    title: {
+    name: {
         type: Sequelize.STRING(32),
         allowNull: false,
         unique: true,

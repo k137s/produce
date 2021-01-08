@@ -13,7 +13,7 @@ const ProductLine = connector.define("ProductLine", {
         unique: true,
         comment: "生产线号"
     },
-    title: {
+    name: {
         type: Sequelize.STRING(32),
         allowNull: false,
         comment: "名称"

@@ -35,13 +35,13 @@ Permission.init({
         allowNull: false,
         comment: "上级节点地址"
     },
-    enable: {
+    isEnable: {
         type: Sequelize.INTEGER,
         defaultValue: 1,
         allowNull: false,
         comment: "是否启用"
     },
-    show: {
+    isShow: {
         type: Sequelize.INTEGER,
         defaultValue: 1,
         allowNull: false,

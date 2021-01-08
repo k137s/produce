@@ -37,6 +37,30 @@ const User = connector.define("User", {
         allowNull: false,
         defaultValue: "生产部",
         comment: "部门"
+    },
+    isSuperuser: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+        comment: "超级用户"
+    },
+    isStaff: {
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+        comment: "职员"
+    },
+    isActive: {
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+        allowNull: false,
+        comment: "是否启用"
+    },
+    joinTime: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        comment: "注册时间",
+        defaultValue: Sequelize.NOW
     }
 }, {
     tableName: "users"

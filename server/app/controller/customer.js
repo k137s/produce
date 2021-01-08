@@ -1,21 +1,40 @@
-import Context from "koa";
+import {
+    Customer
+} from "../models/index.js";
+import {
+    CustomerService
+} from "../service/index.js";
+import Controller from "./controller.js";
 
 
-// 客户操作控制
+// 工艺操作控制
 export default class CustomerController {
     static async listCustomers(ctx) {
-        ctx.body = "ListCustomers controller";
+        const customers = await Controller.listObjects(ctx, CustomerService, Customer);
+        ctx.body = customers;
     }
 
     static async showCustomerDetail(ctx) {
-        ctx.body = `ShowCustomerDetail controller with ID = ${ctx.params.id}`;
+        const customer = await Controller.showObjectDetail(ctx, CustomerService, Customer);
+        ctx.body = customer;
+    }
+
+    static async addCustomer(ctx) {
+        const customer = await CustomerService.getObjectByPk(Customer, ctx.params.id);
+        customer = await Controller.addObject(ctx, CustomerService, Customer, customer);
+        ctx.body = customer;
     }
 
     static async updateCustomer(ctx) {
-        ctx.body = `UpdateCustomer controller with ID = ${ctx.params.id}`;
+        const customer = await Controller.updateObject(ctx, CustomerService, Customer);
+        ctx.body = customer;
     }
 
     static async deleteCustomer(ctx) {
-        ctx.body = `DeleteCustomer controller with ID = ${ctx.params.id}`;
+        await Controller.deleteObject(ctx, CustomerService, Customer);
+    }
+
+    static async deleteCustomers(ctx) {
+        await Controller.deleteObjects(ctx, CustomerService, Customer);
     }
 }
