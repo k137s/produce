@@ -3,7 +3,7 @@ import connector from "../service/script/connector.js";
 import Craft from "./craft.js";
 import Customer from "./customer.js";
 import Permission from "./permission.js";
-import ProductLine from "./product_line.js";
+import ProduceLine from "./produce_line.js";
 import ProductOrder from "./product_order.js";
 import Role from "./role.js";
 import Sale from "./sale.js";
@@ -13,7 +13,7 @@ import Workshop from "./workshop.js";
 
 
 // 创建一对一，车间与生产线
-Workshop.hasOne(ProductLine, {
+Workshop.hasOne(ProduceLine, {
     foreignKey: {
         name: "workshop_id",
         allowNull: false
@@ -21,7 +21,7 @@ Workshop.hasOne(ProductLine, {
     sourceKey: "id"
 });
 
-ProductLine.belongsTo(Workshop, {
+ProduceLine.belongsTo(Workshop, {
     foreignKey: {
         name: "workshop_id",
         allowNull: false
@@ -135,7 +135,7 @@ export {
     Craft,
     Customer,
     Permission,
-    ProductLine,
+    ProduceLine,
     ProductOrder,
     Role,
     Sale,

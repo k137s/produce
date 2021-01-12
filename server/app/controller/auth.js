@@ -2,7 +2,7 @@ import {
     User
 } from "../models/index.js";
 import {
-    UserService
+    userService
 } from "../service/index.js";
 import Controller from "./controller.js";
 
@@ -15,7 +15,7 @@ export default class AuthController {
             password
         } = ctx.request.body;
         console.log(username, password);
-        const user = await UserService.getUserByName(User, username);
+        const user = await userService.getUserByName(User, username);
         if (!user) {
             const message = "用户名不存在";
             ctx.body = message

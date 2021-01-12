@@ -17,6 +17,7 @@ unprotectRouter.post("/register", Auth.register);
 
 // user 相关路由
 protectRouter.get("/", User.listUsers);
+// protectRouter.get("/:name", User.name);
 protectRouter.get("/:id", User.showUserDetail);
 protectRouter.post("/", User.addUser);
 protectRouter.put("/:id", User.updateUser);

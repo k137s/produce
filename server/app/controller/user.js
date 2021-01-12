@@ -2,7 +2,7 @@ import {
     User
 } from "../models/index.js"
 import {
-    UserService
+    userService
 } from "../service/index.js"
 import Controller from "./controller.js";
 
@@ -11,36 +11,36 @@ import Controller from "./controller.js";
 export default class UserController {
     // 获取用户列表
     static async listUsers(ctx) {
-        const users = await Controller.listObjects(ctx, UserService, User);
+        const users = await Controller.get(ctx, userService);
         ctx.body = users;
     }
 
     // 具体用户信息
     static async showUserDetail(ctx) {
-        const user = await Controller.showObjectDetail(ctx, UserService, User);
+        const user = await Controller.getById(ctx, userService);
         ctx.body = user;
     }
 
     // 添加用户
     static async addUser(ctx) {
-        const user = await UserService.getUserByName(User, ctx.request.body.username);
-        user = await Controller.addObject(ctx, UserService, User, user);
+        let user = await userService.getUserByName(ctx.request.body.username);
+        user = await Controller.post(ctx, userService, user);
         ctx.body = user;
     }
 
     // 更新用户
     static async updateUser(ctx) {
-        const user = await Controller.updateObject(ctx, UserService, User);
+        const user = await Controller.put(ctx, userService);
         ctx.body = user;
     }
 
     // 删除用户
     static async deleteUser(ctx) {
-        await Controller.deleteObject(ctx, UserService, User);
+        await Controller.delete(ctx, userService);
     }
 
     // 批量删除
     static async deleteUsers(ctx) {
-        await Controller.deleteObjects(ctx, UserService, User);
+        await Controller.deletes(ctx, userService);
     }
 }

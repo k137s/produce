@@ -6,7 +6,7 @@ import connector from "../service/script/connector.js";
 
 
 // 生产线
-const ProductLine = connector.define("ProductLine", {
+const ProduceLine = connector.define("ProduceLine", {
     sequence: {
         type: Sequelize.STRING(32),
         allowNull: false,
@@ -31,8 +31,8 @@ const ProductLine = connector.define("ProductLine", {
         comment: "详情"
     },
 }, {
-    tableName: "product_lines"
+    tableName: "produce_lines"
 });
 
 
-export default ProductLine;
+export default ProduceLine;

@@ -1,6 +1,3 @@
-import Context from "koa";
-
-
 // 打印 url 访问时间
 export default function logger() {
     return async (ctx, next) => {

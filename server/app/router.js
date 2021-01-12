@@ -4,8 +4,8 @@ import {
     unprotectRouter,
     protectRouter
 } from "./routers/user.js";
-import craft from "./routers/craft.js";
-import customer from "./routers/customer.js";
+// import craft from "./routers/craft.js";
+// import customer from "./routers/customer.js";
 
 
 const router = new Router();
@@ -17,8 +17,8 @@ router.use("/auth", unprotectRouter.routes(), unprotectRouter.allowedMethods);
 // 受保护的路由
 router.use("/user", protectRouter.routes(), protectRouter.allowedMethods);
 
-router.use("/craft", craft.routes(), craft.allowedMethods());
-router.use("/customer", customer.routes(), customer.allowedMethods());
+// router.use("/craft", craft.routes(), craft.allowedMethods());
+// router.use("/customer", customer.routes(), customer.allowedMethods());
 
 
 export default router;

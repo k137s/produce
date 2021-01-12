@@ -4,6 +4,7 @@ import bodyParser from "koa-bodyparser";
 
 import logger from "./app/middleware/logger.js";
 import router from "./app/router.js";
+import resBody from "./app/middleware/response_body.js";
 
 
 // 创建 app 对象
@@ -13,6 +14,7 @@ const port = 3000;
 
 // 注册中间件
 app.use(logger());
+app.use(resBody());
 app.use(cors());
 app.use(bodyParser());
 
